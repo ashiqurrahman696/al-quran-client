@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "name": "Mishary Rashid Al-Afasy",
+        "name_bn": "মিশারী রশিদ আল-আফাসী",
+        "img": "https://i.scdn.co/image/ab6761610000e5ebac381d07bb60d7bfd3be1fe0"
+    },
+    {
+        "id": 2,
+        "name": "Abu Bakr Al-Shatri",
+        "name_bn": "আবু বকর আল-শাত্রী",
+        "img": "https://static.qurancdn.com/images/reciters/3/abu-bakr-al-shatri-pofile.jpeg?v=1"
+    },
+    {
+        "id": 3,
+        "name": "Nasser Al-Qatami",
+        "name_bn": "নাসের আল-ক্বাতামী",
+        "img": "https://api2.quran-pro.com/images/nasser-al-qatami/nasser-al-qatami-medium.webp?version=1686738455015"
+    },
+    {
+        "id": 4,
+        "name": "Yasser Al-Dosari",
+        "name_bn": "ইয়াসের আল-দোসারী",
+        "img": "https://i.scdn.co/image/ab6761610000e5eb6a6628f0fcfd0b1b01bbf912"
+    }
+]
