@@ -1,4 +1,6 @@
-const SurahModal = ({theme, loadingSurah, surahModalBoxRef, surahModalRef, closeSurahModal, surahDetail, reciterId, langId}) => {
+import { FaPlay, FaStop } from "react-icons/fa6";
+
+const SurahModal = ({ theme, loadingSurah, surahModalBoxRef, surahModalRef, closeSurahModal, surahDetail, reciterId, langId, handlePlay, handleStop, currentVerseId}) => {
     return (
         <dialog ref={surahModalRef} className="modal">
             <div ref={surahModalBoxRef} className="modal-box max-w-4xl max-h-9/10">
@@ -11,8 +13,23 @@ const SurahModal = ({theme, loadingSurah, surahModalBoxRef, surahModalRef, close
                     <h3 className="font-bold text-2xl text-center mb-6">{surahDetail.transliteration} (<span className="capitalize">{surahDetail.type}</span> - {langId === 1 ? "আয়াত" : "Verse"} {surahDetail.total_verses})</h3>
                     {surahDetail.verses?.map(verse =>
                         <div key={verse.id} className="space-y-2 mb-2">
-                            <p dir="rtl" className="text-2xl mb-1 font-noto-naskh-arabic">{verse.text.replaceAll("ٱ", "ا")} <span className={`rounded-[50%] border ${theme === "light" ? "border-black" : "border-white"} inline-block p-2 text-xl`}>{verse.id}</span></p>
-                            <p className="text-lg">{verse.translation}</p>
+                            <div className="flex items-center gap-4">
+                                {currentVerseId[0] === surahDetail.id && currentVerseId[1] === verse.id ? <button
+                                    onClick={handleStop}
+                                    className={`btn btn-circle ${theme === "light" ? "btn-base-300" : "btn-neutral"}`}
+                                >
+                                    <FaStop />
+                                </button> : <button
+                                    onClick={() => handlePlay(surahDetail.id, verse.id)}
+                                    className={`btn btn-circle ${theme === "light" ? "btn-base-300" : "btn-neutral"}`}
+                                >
+                                    <FaPlay />
+                                </button>}
+                                <div className="w-full">
+                                    <p dir="rtl" className="text-2xl mb-1 font-noto-naskh-arabic">{verse.text.replaceAll("ٱ", "ا")} <span className={`rounded-[50%] border ${theme === "light" ? "border-black" : "border-white"} inline-block p-2 text-xl`}>{verse.id}</span></p>
+                                    <p className="text-lg text-left">{verse.translation}</p>
+                                </div>
+                            </div>
                             <hr />
                         </div>)}
                     <audio className="w-full sticky bottom-0" controls src={surahDetail.audio?.[reciterId]?.url}></audio>

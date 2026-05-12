@@ -19,12 +19,14 @@ function App() {
   const [surahId, setSurahId] = useState(null);
   const [surahDetail, setSurahDetail] = useState({});
   const [verse, setVerse] = useState({});
+  const [currentVerseId, setCurrentVerseId] = useState([null, null]);
   const [verseId, setVerseId] = useState(1);
   const [searchSurah, setSearchSurah] = useState("");
   const [searchVerse, setSearchVerse] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const filteredSurahs = searchSurah ? surahs.filter(surah => surah.transliteration.toLowerCase().includes(searchSurah.toLowerCase())) : surahs;
   const axios = useAxios();
+  const verseAudioRef = useRef(new Audio());
   const languages = [
     {
       id: 1,
@@ -46,7 +48,7 @@ function App() {
   
   // todo: Load reciters
   useEffect(() => {
-    axios.get('https://al-quran-2.netlify.app/reciters.json')
+    axios.get('http://localhost:5173/reciters.json')
     .then(res => setReciters(res.data))
     .catch(err => console.log(err));
   }, [axios]);
@@ -120,6 +122,32 @@ function App() {
     surahModalRef.current.close();
   };
 
+  const handlePlay = (surahId, verseId) => {
+    const verseAudio = verseAudioRef.current;
+    const verseAudioUrl = `https://everyayah.com/data/${reciters[reciterId - 1].slug}_128kbps/${surahId.toString().padStart(3, "0")}${verseId.toString().padStart(3, "0")}.mp3`;
+
+    verseAudio.pause();
+    verseAudio.currentTime = 0;
+
+    verseAudio.src = verseAudioUrl;
+    verseAudio.play();
+
+    setCurrentVerseId([surahId, verseId]);
+
+    verseAudio.onended = () => {
+      setCurrentVerseId([null, null]);
+    };
+  }
+
+  const handleStop = () => {
+    const verseAudio = verseAudioRef.current;
+
+    verseAudio.pause();
+    verseAudio.currentTime = 0;
+
+    setCurrentVerseId([null, null]);
+  };
+
   return (
     <div className={`max-w-7xl mx-auto p-4 ${theme === "light" ? "text-black" : "text-white"}`}>
       <h1 className="text-center text-4xl font-bold mb-6">{langId === 1 ? "আল কোরআন" : "Al-Quran"}</h1>
@@ -147,6 +175,9 @@ function App() {
             surahDetail={surahDetail}
             reciterId={reciterId}
             langId={langId}
+            handlePlay={handlePlay}
+            handleStop={handleStop}
+            currentVerseId={currentVerseId}
           />
         </TabPanel>
         <TabPanel>
