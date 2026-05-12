@@ -14,7 +14,11 @@
 
 - Display all 114 Surahs.
 - Search Surahs by it's name.
-- Display surah detail with Bengali & English translation and audio.
+- Display surah detail with Bengali & English translation and audio (full surah and single verse).
+
+### Specific verse
+
+- Display specific verse by selecting surah name and verse number.
 
 ### Advanced Search
 
