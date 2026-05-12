@@ -48,7 +48,7 @@ function App() {
   
   // todo: Load reciters
   useEffect(() => {
-    axios.get('http://localhost:5173/reciters.json')
+    axios.get('https://al-quran-2.netlify.app/reciters.json')
     .then(res => setReciters(res.data))
     .catch(err => console.log(err));
   }, [axios]);
