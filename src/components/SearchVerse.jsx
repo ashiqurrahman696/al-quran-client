@@ -1,4 +1,6 @@
-const SearchVerse = ({ theme, searchVerse, setSearchVerse, searchResults, langId }) => {
+import { FaPlay, FaStop } from "react-icons/fa6";
+
+const SearchVerse = ({ theme, searchVerse, setSearchVerse, searchResults, langId, handlePlay, handleStop, currentVerseId }) => {
     return (
         <div className="space-y-6">
             <form>
@@ -12,9 +14,25 @@ const SearchVerse = ({ theme, searchVerse, setSearchVerse, searchResults, langId
                     ? <>
                         {searchResults?.map(result => <div className="space-y-4" key={result.surah.id}>
                             <h3 className="text-center text-2xl font-bold">{result.surah.transliteration}</h3>
-                            {result.verses?.map(verse => <div key={verse.id} className="space-y-2 mb-2">
-                                <p dir="rtl" className="text-2xl mb-1 font-noto-naskh-arabic">{verse.text.replaceAll("ٱ", "ا")} <span className={`rounded-[50%] border ${theme === "light" ? "border-black" : "border-white"} inline-block p-2 text-xl`}>{verse.id}</span></p>
-                                <p className="text-lg">{verse.translation}</p>
+                            {result.verses?.map(verse =>
+                            <div key={verse.id} className="space-y-2 mb-2">
+                                <div className="flex items-center gap-4">
+                                    {currentVerseId[0] === result.surah.id && currentVerseId[1] === verse.id ? <button
+                                        onClick={handleStop}
+                                        className={`btn btn-circle ${theme === "light" ? "btn-base-300" : "btn-neutral"}`}
+                                    >
+                                        <FaStop />
+                                    </button> : <button
+                                        onClick={() => handlePlay(result.surah.id, verse.id)}
+                                        className={`btn btn-circle ${theme === "light" ? "btn-base-300" : "btn-neutral"}`}
+                                    >
+                                        <FaPlay />
+                                    </button>}
+                                    <div className="w-full">
+                                        <p dir="rtl" className="text-2xl/12 mb-1 font-noto-naskh-arabic">{verse.text.replaceAll("ٱ", "ا")} <span className={`rounded-[50%] border ${theme === "light" ? "border-black" : "border-white"} inline-block p-2 text-xl`}>{verse.id}</span></p>
+                                        <p className="text-lg text-left">{verse.translation}</p>
+                                    </div>
+                                </div>
                                 <hr />
                             </div>)}
                         </div>)}

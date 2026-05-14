@@ -17,7 +17,7 @@ const SpecificVerse = ({surahs, surahDetail, verse, setSurahId, setVerseId, reci
             </form>
             <h3 className="text-center text-2xl font-bold">{verse?.surah?.transliteration}: {verse?.verse?.id}</h3>
             <div className="space-y-4">
-                <p dir="rtl" className="text-2xl font-noto-naskh-arabic">{verse?.verse?.text.replaceAll("ٱ", "ا")}</p>
+                <p dir="rtl" className="text-2xl/12 font-noto-naskh-arabic">{verse?.verse?.text.replaceAll("ٱ", "ا")}</p>
                 <p className="text-lg">{verse?.verse?.translation}</p>
                 <audio className="w-full" controls src={verse.audio?.[reciterId]?.url}></audio>
             </div>

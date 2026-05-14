@@ -198,6 +198,9 @@ function App() {
             setSearchVerse={setSearchVerse}
             searchResults={searchResults}
             langId={langId}
+            handlePlay={handlePlay}
+            handleStop={handleStop}
+            currentVerseId={currentVerseId}
           />
         </TabPanel>
       </Tabs>
