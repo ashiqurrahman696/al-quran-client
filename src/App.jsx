@@ -214,10 +214,16 @@ function App() {
             surahs={surahs}
             surahDetail={surahDetail}
             verse={verse}
+            surahId={surahId}
             setSurahId={setSurahId}
+            verseId={verseId}
             setVerseId={setVerseId}
             reciterId={reciterId}
             langId={langId}
+            theme={theme}
+            currentVerseId={currentVerseId}
+            handleStop={handleStop}
+            handlePlayVerse={handlePlayVerse}
           />
         </TabPanel>
         <TabPanel>

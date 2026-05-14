@@ -49,8 +49,8 @@ const SurahModal = ({ theme, loadingSurah, surahModalBoxRef, surahModalRef, clos
                                 </div>
                             </div>
                             <hr />
-                        </div>)}
-                    {/* <audio ref={surahAudioRef} className="w-full sticky bottom-0" controls src={surahDetail.audio?.[reciterId]?.url}></audio> */}
+                        </div>)
+                    }
                 </>}
             </div>
 
