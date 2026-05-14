@@ -1,6 +1,6 @@
 import { FaGear } from 'react-icons/fa6';
 
-const Sidebar = ({theme, setTheme, languages, langId, setLangId, reciters, reciterId, setReciterId}) => {
+const Sidebar = ({theme, setTheme, languages, langId, setLangId, reciters, reciterId, setReciterId, handleStop}) => {
     return (
         <div className="drawer">
             <input id="my-drawer-1" type="checkbox" className="drawer-toggle" />
@@ -27,7 +27,11 @@ const Sidebar = ({theme, setTheme, languages, langId, setLangId, reciters, recit
                     <div className="space-y-4">
                         {reciters?.map(reciter => <div key={reciter.id} className={`card ${theme === "light"
                             ? reciterId === reciter.id ? "bg-primary text-white" : "bg-black/5"
-                            : reciterId === reciter.id ? "bg-primary text-black" : "bg-white/5"} w-full shadow-sm cursor-pointer ${reciterId === reciter.id && "bg-primary"}`} onClick={() => setReciterId(reciter.id)}>
+                            : reciterId === reciter.id ? "bg-primary text-black" : "bg-white/5"} w-full shadow-sm cursor-pointer ${reciterId === reciter.id && "bg-primary"}`} onClick={() => {
+                                setReciterId(reciter.id);
+                                handleStop();
+                            }
+                            }>
                             <figure>
                                 <img
                                     src={reciter.img}

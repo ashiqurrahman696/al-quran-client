@@ -1,6 +1,6 @@
 import { FaPlay, FaStop } from "react-icons/fa6";
 
-const SurahModal = ({ theme, loadingSurah, surahModalBoxRef, surahModalRef, closeSurahModal, surahDetail, reciterId, langId, handlePlay, handleStop, currentVerseId}) => {
+const SurahModal = ({ theme, loadingSurah, surahModalBoxRef, surahModalRef, closeSurahModal, surahDetail, reciterId, langId, handlePlayVerse, handleStop, currentVerseId, handlePlaySurah, isSurahPlaying }) => {
     return (
         <dialog ref={surahModalRef} className="modal">
             <div ref={surahModalBoxRef} className="modal-box max-w-4xl max-h-9/10">
@@ -11,6 +11,24 @@ const SurahModal = ({ theme, loadingSurah, surahModalBoxRef, surahModalRef, clos
                 </div>
                 {loadingSurah ? <p className="text-center text-2xl font-semibold">{langId === 1 ? "সূরা লোড হচ্ছে" : "Loading surah"}...</p> : <>
                     <h3 className="font-bold text-2xl text-center mb-6">{surahDetail.transliteration} (<span className="capitalize">{surahDetail.type}</span> - {langId === 1 ? "আয়াত" : "Verse"} {surahDetail.total_verses})</h3>
+                    <div className="text-center mb-6">
+                        {isSurahPlaying ?
+                            <button
+                                onClick={handleStop}
+                                className={`btn ${theme === "light" ? "btn-base-300" : "btn-neutral"}`}
+                            >
+                                <FaStop />
+                                <span>Stop</span>
+                            </button> :
+                            <button
+                                onClick={() => handlePlaySurah(surahDetail.audio?.[reciterId]?.url)}
+                                className={`btn ${theme === "light" ? "btn-base-300" : "btn-neutral"}`}
+                            >
+                                <FaPlay />
+                                <span>Play</span>
+                            </button>
+                        }
+                    </div>
                     {surahDetail.verses?.map(verse =>
                         <div key={verse.id} className="space-y-2 mb-2">
                             <div className="flex items-center gap-4">
@@ -20,7 +38,7 @@ const SurahModal = ({ theme, loadingSurah, surahModalBoxRef, surahModalRef, clos
                                 >
                                     <FaStop />
                                 </button> : <button
-                                    onClick={() => handlePlay(surahDetail.id, verse.id)}
+                                    onClick={() => handlePlayVerse(surahDetail.id, verse.id)}
                                     className={`btn btn-circle ${theme === "light" ? "btn-base-300" : "btn-neutral"}`}
                                 >
                                     <FaPlay />
@@ -32,7 +50,7 @@ const SurahModal = ({ theme, loadingSurah, surahModalBoxRef, surahModalRef, clos
                             </div>
                             <hr />
                         </div>)}
-                    <audio className="w-full sticky bottom-0" controls src={surahDetail.audio?.[reciterId]?.url}></audio>
+                    {/* <audio ref={surahAudioRef} className="w-full sticky bottom-0" controls src={surahDetail.audio?.[reciterId]?.url}></audio> */}
                 </>}
             </div>
 

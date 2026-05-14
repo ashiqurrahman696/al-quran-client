@@ -24,9 +24,11 @@ function App() {
   const [searchSurah, setSearchSurah] = useState("");
   const [searchVerse, setSearchVerse] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [isSurahPlaying, setIsSurahPlaying] = useState(false);
   const filteredSurahs = searchSurah ? surahs.filter(surah => surah.transliteration.toLowerCase().includes(searchSurah.toLowerCase())) : surahs;
   const axios = useAxios();
   const verseAudioRef = useRef(new Audio());
+  const surahAudioRef = useRef(new Audio());
   const languages = [
     {
       id: 1,
@@ -48,7 +50,7 @@ function App() {
   
   // todo: Load reciters
   useEffect(() => {
-    axios.get('https://al-quran-2.netlify.app/reciters.json')
+    axios.get('http://localhost:5173/reciters.json')
     .then(res => setReciters(res.data))
     .catch(err => console.log(err));
   }, [axios]);
@@ -98,6 +100,7 @@ function App() {
   const handleTabSelect = (index, lastIndex, event) => {
     setSurahId(null);
     setSearchSurah("");
+    handleStop();
     if(index === 1){
       setSurahId(1);
       setVerseId(1);
@@ -120,9 +123,25 @@ function App() {
 
   const closeSurahModal = () => {
     surahModalRef.current.close();
+    handleStop();
   };
 
-  const handlePlay = (surahId, verseId) => {
+  const handlePlaySurah = (url) => {
+    const surahAudio = surahAudioRef.current;
+
+    surahAudio.pause();
+    surahAudio.currentTime = 0;
+
+    surahAudio.src = url;
+    surahAudio.play();
+    setIsSurahPlaying(true);
+
+    surahAudio.onended = () => {
+      setIsSurahPlaying(false);
+    }
+  }
+
+  const handlePlayVerse = (surahId, verseId) => {
     const verseAudio = verseAudioRef.current;
     const verseAudioUrl = `https://everyayah.com/data/${reciters[reciterId - 1].slug}_128kbps/${surahId.toString().padStart(3, "0")}${verseId.toString().padStart(3, "0")}.mp3`;
 
@@ -133,6 +152,7 @@ function App() {
     verseAudio.play();
 
     setCurrentVerseId([surahId, verseId]);
+    setIsSurahPlaying(false);
 
     verseAudio.onended = () => {
       setCurrentVerseId([null, null]);
@@ -141,11 +161,16 @@ function App() {
 
   const handleStop = () => {
     const verseAudio = verseAudioRef.current;
+    const surahAudio = surahAudioRef.current;
 
     verseAudio.pause();
     verseAudio.currentTime = 0;
 
+    surahAudio.pause();
+    surahAudio.currentTime = 0;
+
     setCurrentVerseId([null, null]);
+    setIsSurahPlaying(false);
   };
 
   return (
@@ -175,9 +200,13 @@ function App() {
             surahDetail={surahDetail}
             reciterId={reciterId}
             langId={langId}
-            handlePlay={handlePlay}
+            handlePlaySurah={handlePlaySurah}
+            handlePlayVerse={handlePlayVerse}
             handleStop={handleStop}
             currentVerseId={currentVerseId}
+            surahAudioRef={surahAudioRef}
+            isSurahPlaying={isSurahPlaying}
+            setIsSurahPlaying={setIsSurahPlaying}
           />
         </TabPanel>
         <TabPanel>
@@ -198,7 +227,7 @@ function App() {
             setSearchVerse={setSearchVerse}
             searchResults={searchResults}
             langId={langId}
-            handlePlay={handlePlay}
+            handlePlayVerse={handlePlayVerse}
             handleStop={handleStop}
             currentVerseId={currentVerseId}
           />
@@ -213,6 +242,7 @@ function App() {
         reciters={reciters}
         reciterId={reciterId}
         setReciterId={setReciterId}
+        handleStop={handleStop}
       />
     </div>
   )

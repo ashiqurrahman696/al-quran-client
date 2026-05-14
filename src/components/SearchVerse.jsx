@@ -1,6 +1,6 @@
 import { FaPlay, FaStop } from "react-icons/fa6";
 
-const SearchVerse = ({ theme, searchVerse, setSearchVerse, searchResults, langId, handlePlay, handleStop, currentVerseId }) => {
+const SearchVerse = ({ theme, searchVerse, setSearchVerse, searchResults, langId, handlePlayVerse, handleStop, currentVerseId }) => {
     return (
         <div className="space-y-6">
             <form>
@@ -23,7 +23,7 @@ const SearchVerse = ({ theme, searchVerse, setSearchVerse, searchResults, langId
                                     >
                                         <FaStop />
                                     </button> : <button
-                                        onClick={() => handlePlay(result.surah.id, verse.id)}
+                                        onClick={() => handlePlayVerse(result.surah.id, verse.id)}
                                         className={`btn btn-circle ${theme === "light" ? "btn-base-300" : "btn-neutral"}`}
                                     >
                                         <FaPlay />
