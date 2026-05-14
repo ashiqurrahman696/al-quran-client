@@ -23,7 +23,7 @@
 ### Advanced Search
 
 - Quick search to find any ayah of a surah.
-- Real-time search to find ayahs through **Bengali or English** translations.
+- Real-time search to find ayahs through **Bengali or English** translations including single verse audio.
 
 ### Settings
 
