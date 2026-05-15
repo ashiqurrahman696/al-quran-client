@@ -7,13 +7,19 @@ const SpecificVerse = ({ surahs, surahDetail, verse, surahId, setSurahId, verseI
             <form className="grid sm:grid-cols-2 gap-4">
                 <div>
                     <label htmlFor="surah">{langId === 1 ? "সূরা" : "Surah"}</label>
-                    <select id="surah" className="select w-full mt-1" onChange={(e) => setSurahId(Number(e.target.value))}>
+                    <select id="surah" className="select w-full mt-1" onChange={(e) => {
+                        setSurahId(Number(e.target.value));
+                        handleStop();
+                    }}>
                         {surahs?.map(surah => <option key={surah.id} value={surah.id}>{surah.transliteration}</option>)}
                     </select>
                 </div>
                 <div>
                     <label htmlFor="verse">{langId === 1 ? "আয়াত" : "Verse"}</label>
-                    <select id="verse" className="select w-full mt-1" onChange={(e) => setVerseId(Number(e.target.value))}>
+                    <select id="verse" className="select w-full mt-1" onChange={(e) => {
+                        setVerseId(Number(e.target.value));
+                        handleStop();
+                    }}>
                         {surahDetail.verses?.map(verse => <option key={verse.id} value={verse.id}>{verse.id}</option>)}
                     </select>
                 </div>
