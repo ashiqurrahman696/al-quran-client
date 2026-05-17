@@ -1,6 +1,6 @@
 # Al-Quran Web (Premium Experience)
 
-**Al-Quran Web** is a high-performance, and feature-rich Holy Quran reading platform. Built with **React.js 19** and **Tailwind CSS v4**, it offers a seamless reading experience with dual-language support (Bengali & English) and advanced search.
+**Al-Quran Web** is a high-performance, and feature-rich Holy Quran reading platform. Built with **React.js 19**, **Tailwind CSS v4** and **daisyUI**. It offers a seamless reading experience with dual-language support (Bengali & English) and advanced search.
 
 ## Quick Links
 

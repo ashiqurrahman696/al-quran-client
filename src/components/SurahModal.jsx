@@ -18,14 +18,14 @@ const SurahModal = ({ theme, loadingSurah, surahModalBoxRef, surahModalRef, clos
                                 className={`btn ${theme === "light" ? "btn-base-300" : "btn-neutral"}`}
                             >
                                 <FaStop />
-                                <span>Stop</span>
+                                <span>{langId === 1 ? "বন্ধ" : "Stop"}</span>
                             </button> :
                             <button
                                 onClick={() => handlePlaySurah(surahDetail.audio?.[reciterId]?.url)}
                                 className={`btn ${theme === "light" ? "btn-base-300" : "btn-neutral"}`}
                             >
                                 <FaPlay />
-                                <span>Play</span>
+                                <span>{langId === 1 ? "চালু" : "Play"}</span>
                             </button>
                         }
                     </div>
