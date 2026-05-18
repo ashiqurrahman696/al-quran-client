@@ -29,6 +29,7 @@
 
 - Toggle  theme between **Light or Night**
 - Toggle language between **Bengali or English**
+- Change font size of both **Arabic** and **Translation** text
 - Choose among 4 quran reciters
     1. Mishary Rashid Al-Afasy
     2. Abu Bakr Al-Shatri
