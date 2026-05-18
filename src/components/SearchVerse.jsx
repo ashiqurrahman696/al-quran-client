@@ -1,6 +1,6 @@
 import { FaPlay, FaStop } from "react-icons/fa6";
 
-const SearchVerse = ({ theme, searchVerse, setSearchVerse, searchResults, langId, handlePlayVerse, handleStop, currentVerseId }) => {
+const SearchVerse = ({ theme, searchVerse, setSearchVerse, searchResults, langId, handlePlayVerse, handleStop, currentVerseId, arFontSize, trFontSize }) => {
     return (
         <div className="space-y-6">
             <form>
@@ -29,8 +29,12 @@ const SearchVerse = ({ theme, searchVerse, setSearchVerse, searchResults, langId
                                         <FaPlay />
                                     </button>}
                                     <div className="w-full">
-                                        <p dir="rtl" className="text-2xl/12 mb-1 font-noto-naskh-arabic">{verse.text.replaceAll("ٱ", "ا")} <span className={`rounded-[50%] border ${theme === "light" ? "border-black" : "border-white"} inline-block p-2 text-xl`}>{verse.id}</span></p>
-                                        <p className="text-lg text-left">{verse.translation}</p>
+                                        <p dir="rtl" className="mb-1 font-noto-naskh-arabic leading-loose" style={{
+                                            fontSize: `${arFontSize}px`
+                                        }}>{verse.text.replaceAll("ٱ", "ا")} <span className={`rounded-[50%] border ${theme === "light" ? "border-black" : "border-white"} inline-block p-2 text-xl`}>{verse.id}</span></p>
+                                        <p className="text-left" style={{
+                                            fontSize: `${trFontSize}px`
+                                        }}>{verse.translation}</p>
                                     </div>
                                 </div>
                                 <hr />

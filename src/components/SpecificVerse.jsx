@@ -1,7 +1,7 @@
 import { FaPlay, FaStop } from "react-icons/fa6";
 import { HiRocketLaunch } from "react-icons/hi2";
 
-const SpecificVerse = ({ surahs, surahDetail, verse, surahId, setSurahId, verseId, setVerseId, langId, theme, currentVerseId, handleStop, handlePlayVerse }) => {
+const SpecificVerse = ({ surahs, surahDetail, verse, surahId, setSurahId, verseId, setVerseId, langId, theme, currentVerseId, handleStop, handlePlayVerse, arFontSize, trFontSize }) => {
     return (
         <div className="space-y-6">
             <form className="grid sm:grid-cols-2 gap-4">
@@ -39,8 +39,12 @@ const SpecificVerse = ({ surahs, surahDetail, verse, surahId, setSurahId, verseI
                         <FaPlay />
                     </button>}
                     <div className="w-full">
-                        <p dir="rtl" className="text-2xl/12 mb-1 font-noto-naskh-arabic">{verse?.verse?.text.replaceAll("ٱ", "ا")}</p>
-                        <p className="text-lg text-left">{verse?.verse?.translation}</p>
+                        <p dir="rtl" className="mb-1 font-noto-naskh-arabic leading-loose" style={{
+                            fontSize: `${arFontSize}px`
+                        }}>{verse?.verse?.text.replaceAll("ٱ", "ا")}</p>
+                        <p className="text-left" style={{
+                            fontSize: `${trFontSize}px`
+                        }}>{verse?.verse?.translation}</p>
                     </div>
                 </div>
             </div>

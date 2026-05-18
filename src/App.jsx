@@ -11,6 +11,8 @@ import Sidebar from "./components/Sidebar";
 function App() {
   const [theme, setTheme] = useState(localStorage.getItem("theme") ?? "light")
   const [langId, setLangId] = useState(1);
+  const [arFontSize, setArFontSize] = useState(24);
+  const [trFontSize, setTrFontSize] = useState(16);
   const [loadingSurahs, setLoadingSurahs] = useState(true);
   const [loadingSurah, setLoadingSurah] = useState(true);
   const [surahs, setSurahs] = useState([]);
@@ -207,6 +209,8 @@ function App() {
             surahAudioRef={surahAudioRef}
             isSurahPlaying={isSurahPlaying}
             setIsSurahPlaying={setIsSurahPlaying}
+            arFontSize={arFontSize}
+            trFontSize={trFontSize}
           />
         </TabPanel>
         <TabPanel>
@@ -224,6 +228,8 @@ function App() {
             currentVerseId={currentVerseId}
             handleStop={handleStop}
             handlePlayVerse={handlePlayVerse}
+            arFontSize={arFontSize}
+            trFontSize={trFontSize}
           />
         </TabPanel>
         <TabPanel>
@@ -236,6 +242,8 @@ function App() {
             handlePlayVerse={handlePlayVerse}
             handleStop={handleStop}
             currentVerseId={currentVerseId}
+            arFontSize={arFontSize}
+            trFontSize={trFontSize}
           />
         </TabPanel>
       </Tabs>
@@ -249,6 +257,10 @@ function App() {
         reciterId={reciterId}
         setReciterId={setReciterId}
         handleStop={handleStop}
+        arFontSize={arFontSize}
+        setArFontSize={setArFontSize}
+        trFontSize={trFontSize}
+        setTrFontSize={setTrFontSize}
       />
     </div>
   )
