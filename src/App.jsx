@@ -70,30 +70,36 @@ function App() {
   // todo: Load specific surah
   useEffect(() => {
     setLoadingSurah(true);
-    axios.get(`/surah/${surahId}/${languages[langId - 1].code}`)
-      .then(res => {
-        setSurahDetail(res.data);
-        setLoadingSurah(false);
-      })
-      .catch(err => console.log(err));
+    if(surahId !== null){
+      axios.get(`/surah/${surahId}/${languages[langId - 1].code}`)
+        .then(res => {
+          setSurahDetail(res.data);
+          setLoadingSurah(false);
+        })
+        .catch(err => console.log(err));
+    }
   }, [surahId, axios, langId]);
 
   // todo: Load specific verse
   useEffect(() => {
-    axios.get(`/surah/${surahId}/verse/${verseId}/${languages[langId - 1].code}`)
-      .then(res => {
-        setVerse(res.data);
-      })
-      .catch(err => console.log(err));
+    if(surahId !== null){
+      axios.get(`/surah/${surahId}/verse/${verseId}/${languages[langId - 1].code}`)
+        .then(res => {
+          setVerse(res.data);
+        })
+        .catch(err => console.log(err));
+    }
   }, [surahId, verseId, axios, langId]);
 
   // todo: Search verses
   useEffect(() => {
-    axios.get(`/search/${searchVerse}/${languages[langId - 1].code}`)
-      .then(res => {
-        setSearchResults(res.data.results);
-      })
-      .catch(err => console.log(err));
+    if(searchVerse !== ""){
+      axios.get(`/search/${searchVerse}/${languages[langId - 1].code}`)
+        .then(res => {
+          setSearchResults(res.data.results);
+        })
+        .catch(err => console.log(err));
+    }
   }, [searchVerse, axios, langId]);
 
   const surahModalRef = useRef(null);
