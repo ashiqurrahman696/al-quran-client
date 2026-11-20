@@ -207,6 +207,7 @@ function App() {
             closeSurahModal={closeSurahModal}
             surahDetail={surahDetail}
             reciterId={reciterId}
+            reciters={reciters}
             langId={langId}
             handlePlaySurah={handlePlaySurah}
             handlePlayVerse={handlePlayVerse}

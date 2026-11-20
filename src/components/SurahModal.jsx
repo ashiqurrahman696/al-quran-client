@@ -1,6 +1,10 @@
 import { FaPlay, FaStop } from "react-icons/fa6";
+import AudioPlayer from "./AudioPlayer";
 
-const SurahModal = ({ theme, loadingSurah, surahModalBoxRef, surahModalRef, closeSurahModal, surahDetail, reciterId, langId, handlePlayVerse, handleStop, currentVerseId, handlePlaySurah, isSurahPlaying, arFontSize, trFontSize }) => {
+
+
+const SurahModal = ({ theme, loadingSurah, surahModalBoxRef, surahModalRef, closeSurahModal, surahDetail, reciterId, langId, handlePlayVerse, handleStop, currentVerseId, handlePlaySurah, isSurahPlaying, arFontSize, trFontSize, reciters }) => {
+    const reciter = reciters.find(r => r.id === reciterId);
     return (
         <dialog ref={surahModalRef} className="modal">
             <div ref={surahModalBoxRef} className="modal-box max-w-4xl max-h-9/10">
@@ -11,7 +15,7 @@ const SurahModal = ({ theme, loadingSurah, surahModalBoxRef, surahModalRef, clos
                 </div>
                 {loadingSurah ? <p className="text-center text-2xl font-semibold">{langId === 1 ? "সূরা লোড হচ্ছে" : "Loading surah"}...</p> : <>
                     <h3 className="font-bold text-2xl text-center mb-6">{surahDetail.transliteration} (<span className="capitalize">{surahDetail.type}</span> - {langId === 1 ? "আয়াত" : "Verse"} {surahDetail.total_verses})</h3>
-                    <div className="text-center mb-6">
+                    {/* <div className="text-center mb-6">
                         {isSurahPlaying ?
                             <button
                                 onClick={handleStop}
@@ -28,7 +32,7 @@ const SurahModal = ({ theme, loadingSurah, surahModalBoxRef, surahModalRef, clos
                                 <span>{langId === 1 ? "চালু" : "Play"}</span>
                             </button>
                         }
-                    </div>
+                    </div> */}
                     {surahDetail.verses?.map(verse =>
                         <div key={verse.id} className="space-y-2 mb-2">
                             <div className="flex items-center gap-4">
@@ -55,6 +59,7 @@ const SurahModal = ({ theme, loadingSurah, surahModalBoxRef, surahModalRef, clos
                             <hr />
                         </div>)
                     }
+                    <AudioPlayer src={surahDetail.audio?.[reciterId]?.url} title={`${surahDetail.transliteration} - ${langId === 1 ? reciter.name_bn : reciter.name}`} theme={theme} />
                 </>}
             </div>
 
